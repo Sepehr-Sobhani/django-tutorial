@@ -10,7 +10,7 @@
 
 <body>
   <h1>Questions</h1>
-
+  <a href="{% url 'polls:create' %}">Create New Question</a>
   {% if latest_question_list %}
   <ol>
     {% for question in latest_question_list %}

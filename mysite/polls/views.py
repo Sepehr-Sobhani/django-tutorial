@@ -1,3 +1,4 @@
+from .forms import QuestionForm
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from .models import Question, Choice
@@ -52,3 +53,12 @@ class QuestionDeleteView(generic.DeleteView):
         context = super(QuestionDeleteView, self).get_context_data(**kwargs)
         context["num_votes"] = num_votes["num_votes"]
         return context
+
+
+class QuestionCreateView(generic.CreateView):
+    model = Question
+    form_class = QuestionForm
+    template_name = "polls/create_question.html"
+
+    def get_success_url(self):
+        return reverse_lazy('polls:index')
