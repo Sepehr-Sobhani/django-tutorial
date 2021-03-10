@@ -1,9 +1,9 @@
-from django.db import models
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from .models import Question, Choice
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.db.models import Sum
 
 
 class IndexView(generic.ListView):
@@ -37,3 +37,18 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+class QuestionDeleteView(generic.DeleteView):
+    model = Question
+    template_name = "polls/question_delete.html"
+
+    def get_success_url(self):
+        return reverse_lazy("polls:index")
+
+    def get_context_data(self, **kwargs):
+        question = get_object_or_404(Question, pk=self.kwargs['pk'])
+        num_votes = question.choice_set.aggregate(num_votes=Sum('votes'))
+        context = super(QuestionDeleteView, self).get_context_data(**kwargs)
+        context["num_votes"] = num_votes["num_votes"]
+        return context
