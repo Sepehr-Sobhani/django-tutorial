@@ -1,4 +1,4 @@
-from .forms import QuestionForm
+from .forms import QuestionForm, ChoiceForm
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from .models import Question, Choice
@@ -59,6 +59,14 @@ class QuestionCreateView(generic.CreateView):
     model = Question
     form_class = QuestionForm
     template_name = "polls/create_question.html"
+
+    def form_valid(self, QuestionForm):
+        question = QuestionForm.save()
+        choices_list = list(
+            filter(("").__ne__, self.request.POST.getlist('choices')))
+        for choice in choices_list:
+            Choice.objects.create(question=question, choice_text=choice)
+        return super(QuestionCreateView, self).form_valid(QuestionForm)
 
     def get_success_url(self):
         return reverse_lazy('polls:index')

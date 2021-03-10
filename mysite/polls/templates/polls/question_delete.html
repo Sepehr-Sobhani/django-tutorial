@@ -12,8 +12,14 @@
 
   <form action="" method="POST">
     {% csrf_token %}
+
     <h3>Do you want to delete the question "{{ question.question_text }}"?</h3>
+    {% if num_votes %}
     <h4>This question has {{ num_votes }} votes</h4>
+    {% else %}
+    <h4>This question has 0 votes</h4>
+    {% endif %}
+
     <p><input type='submit' value='Yes' /> <a href="{% url 'polls:index' %}">Cancel</a></p>
   </form>
 

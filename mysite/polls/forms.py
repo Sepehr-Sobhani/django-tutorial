@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import ModelForm, fields, widgets
-from .models import Question
+from django.db.models import fields
+from django.forms import ModelForm
+from .models import Choice, Question
 
 
 class DateTimeInput(forms.DateTimeInput):

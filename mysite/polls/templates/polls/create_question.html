@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>Create Question</title>
 </head>
 
@@ -12,8 +13,36 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <p>
+    <div class="input_fields_wrap">
+      <button class="add_field_button">Add More Choice</button><br>
+      <div><input type="text" name="choices"></div>
+    </div>
+    </p>
     <input type="submit" value="Save">
   </form>
 </body>
+<script>
+  $(document).ready(function () {
+    const max_fields = 10; //maximum input boxes allowed
+    const wrapper = $(".input_fields_wrap"); //Fields wrapper
+    const add_button = $(".add_field_button"); //Add button ID
+
+    let x = 1; //initlal text box count
+    $(add_button).click(function (e) { //on add input button click
+      e.preventDefault();
+      if (x < max_fields) { //max input box allowed
+        x++; //text box increment
+        $(wrapper).append('<div><input type="text" name="choices"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+      }
+    });
+
+    $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+      e.preventDefault();
+      $(this).parent('div').remove();
+      x--;
+    })
+  });
+</script>
 
 </html>
