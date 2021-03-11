@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+  {% block content %}
+  {% endblock %}
+
+</body>
+<script>
+  $(document).ready(function () {
+    const max_fields = 10; //maximum input boxes allowed
+    const wrapper = $(".input_fields_wrap"); //Fields wrapper
+    const add_button = $(".add_field_button"); //Add button ID
+
+    let x = 1; //initlal text box count
+    $(add_button).click(function (e) { //on add input button click
+      e.preventDefault();
+      if (x < max_fields) { //max input box allowed
+        x++; //text box increment
+        $(wrapper).append('<div class = "choice-field"><input type="text" name="choices"/><a href="#" class="remove_field btn btn-outline-danger btn-sm">Remove</a></div>'); //add input box
+      }
+    });
+
+    $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+      e.preventDefault();
+      $(this).parent('div').remove();
+      x--;
+    })
+  });
+</script>
+
+</html>

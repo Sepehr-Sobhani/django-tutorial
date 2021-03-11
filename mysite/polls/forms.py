@@ -13,5 +13,6 @@ class QuestionForm(ModelForm):
         model = Question
         fields = ['question_text', 'pub_date']
         widgets = {
+            'question_text': forms.Textarea,
             'pub_date': DateTimeInput()
         }

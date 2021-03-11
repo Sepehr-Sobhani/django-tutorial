@@ -1,4 +1,4 @@
-from .forms import QuestionForm, ChoiceForm
+from .forms import QuestionForm
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from .models import Question, Choice
@@ -42,7 +42,7 @@ def vote(request, question_id):
 
 class QuestionDeleteView(generic.DeleteView):
     model = Question
-    template_name = "polls/question_delete.html"
+    template_name = "polls/delete_question.html"
 
     def get_success_url(self):
         return reverse_lazy("polls:index")

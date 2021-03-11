@@ -1,0 +1,23 @@
+{% extends "polls/base.html" %}
+
+{% block title %} Delete Question{% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{request.path}}">Delete Question</a>
+  </div>
+</nav>
+<form action="" method="POST">
+  {% csrf_token %}
+
+  <h3>Do you want to delete the question "{{ question.question_text }}"?</h3>
+  {% if num_votes %}
+  <h4>This question has {{ num_votes }} votes</h4>
+  {% else %}
+  <h4>This question has 0 votes</h4>
+  {% endif %}
+
+  <p><a class="btn btn-secondary" href="{% url 'polls:index' %}">Back</a> <input class="btn btn-success" type='submit'
+      value='Yes' /> </p>
+</form>
+{% endblock %}

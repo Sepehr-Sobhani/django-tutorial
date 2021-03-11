@@ -1,0 +1,58 @@
+h1,
+h3,
+h4 {
+  margin-left: 1rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  align-content: center;
+}
+
+form {
+  margin-top: 1rem;
+}
+
+form > p:nth-child(2) > label {
+  text-align: center;
+  vertical-align: middle;
+}
+
+textarea {
+  width: 90vw;
+  height: 2vw;
+}
+
+.input_fields_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.choice-field {
+  margin-top: 0.5rem;
+}
+
+form > div > div.choice-field > a {
+  margin-left: 1rem;
+}
+
+.vote-form {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+form > p {
+  margin-left: 1rem;
+}
+
+form > div {
+  margin-left: 1rem;
+}
+
+body > a {
+  margin-left: 1rem;
+}
